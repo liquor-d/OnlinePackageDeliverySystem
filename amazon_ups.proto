@@ -1,0 +1,68 @@
+syntax = "proto2";
+
+package org.example.protocol;
+
+message UAConnect {
+    required int32 worldid = 1;
+}
+
+message UAConnected {
+    required string result = 1; // "Connected!" or "error!"
+}
+
+message ARequestShipment {
+    required int32 whnum = 1; // Warehouse number
+    optional int64 ups_user_id = 2; // UPS user ID for authentication purposes
+    required int32 x = 3; // Destination X coordinate
+    required int32 y = 4; // Destination Y coordinate
+    required Product products = 5; // Product information
+    required int64 package_id = 6;//ADD
+    required int64 seqnum = 7;//ADD
+}
+
+message AReadyForShipment {
+    required int32 truck_id = 1; // Truck ID assigned by UPS
+    required int32 wh_id = 2; // Warehouse ID assigned by Amazon
+    repeated int64 package_id = 3; // List of package IDs to be shipped
+    required int64 seqnum = 4;// ADD
+}
+
+message AAcknowledge {
+    required int64 ack = 1; // CHANGE:  bool -> int64 , means the acknowledged seqnum
+    optional string error = 2; // Error message if any
+}
+
+message AUCommands{
+    repeated ARequestShipment request_package_id = 1;// CHANGE: optional -> repeated
+    repeated AReadyForShipment packages_loaded = 2;// CHANGE: optional -> repeated
+    repeated AAcknowledge acknowledge = 3;// CHANGE: optional -> repeated
+}
+
+message Product{
+    required int64 id = 1; // Unique product ID
+    required string description = 2; // Product description
+    required int32 count = 3; // Product count
+}
+
+message UAcknowledge {
+    required int64 ack = 1; // CHANGE:  bool -> int64 , means the acknowledged seqnum
+    optional string error = 2; // Error message if any
+}
+
+message UTruckArrived {
+    required int32 truck_id = 1; // Truck ID assigned by UPS
+    required int32 wh_id = 2; // Warehouse ID assigned by Amazon
+    required int64 seqnum = 3; //ADD
+}
+
+message UDelivered {
+    required int64 package_id = 1; // Package ID of the delivered package
+    required int64 seqnum = 2; // ADD
+}
+
+message UACommands{
+    repeated UTruckArrived truck_arrival = 1; // CHANGE: optional -> repeated
+    repeated UDelivered package_deliver = 2;// CHANGE: optional -> repeated
+    repeated UAcknowledge acknowledge = 3;//CHANGE：optional -> repeated
+}
+

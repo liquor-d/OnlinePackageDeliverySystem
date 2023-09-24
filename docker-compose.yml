@@ -1,0 +1,50 @@
+version: "2"
+services:
+  database:
+    image: "postgres:13-alpine3.15"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGDATA: /var/lib/postgresql/data/dbdata/
+    env_file:
+      - .env
+
+  web-init:
+    build: ./upsWebsite
+    volumes:
+      - ./upsWebsite:/code
+    command: bash -c "/code/wait-db.sh database:5432 --strict -- ./init.sh"
+    depends_on:
+      - database
+
+  web:
+    build: ./upsWebsite
+    user: nobody
+    command:
+      - /code/run.sh
+    volumes:
+      - ./upsWebsite:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - web-init
+      - database
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/config:/etc/nginx/conf.d
+    depends_on:
+      - web
+
+  run:
+    build: ./app
+    depends_on:
+      - database
+      - web
+      - web-init
+
+    ports:
+      - "12345:12345"

@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% if title %}
+        <title>UPS - {{ title }}</title>
+    {% else %}
+        <title>UPS</title>
+    {% endif %}
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+
+</head>
+
+<body class="bg-light">
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <div class="navbar-nav mr-auto">
+                <li><a class="nav-link px-2 text-white" href="{% url 'home' %}">Home</a></li>
+            </div>
+
+            {% if user.is_authenticated %}
+                <ul  class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'package-update' %}">Update Package</a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'search-postal-fee' %}">Postal Fee</a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'package-search' %}">Search Package</a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'profile' %}">My Package</a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            {% else %}
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"l>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'package-search' %}">Search Package </a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'search-postal-fee' %}">Postal Fee </a></li>
+                    <li><a class="nav-link px-2 text-warning" href="{% url 'search-truck' %}">Search Truck </a></li>
+                    <li><a class="btn btn-outline-light me-2 " href="{% url 'login' %}">Login</a></li>
+                    <li><a class="btn btn-warning" href="{% url 'register' %}">Register</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</main>
+</body>
+<footer style="background-color: #333333; position: absolute ;bottom: 0; width: 100%;";>
+    <div class="container">
+        <div class="connect-with-us">
+            <h3 style="color: #FFA500;">Connect with Us</h3>
+            <div class="social-icons">
+                <a href=" " target="_blank"><i class="fa fa-facebook" style="color: #FFA500;">facebook&nbsp;&nbsp;</i></a >
+                <a href="https://twitter.com/UPS" target="_blank"><i class="fa fa-twitter" style="color: #FFA500;">twitter&nbsp;&nbsp;</i></a >
+                <a href="https://www.linkedin.com/company/ups" target="_blank"><i class="fa fa-linkedin" style="color: #FFA500;">linkedin&nbsp;&nbsp;</i></a >
+                <a href="https://www.instagram.com/ups/" target="_blank"><i class="fa fa-instagram" style="color: #FFA500;">instagram</i></a >
+            </div>
+        </div>
+    </div>
+</footer>
+</html>

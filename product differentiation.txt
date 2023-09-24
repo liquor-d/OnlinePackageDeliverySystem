@@ -1,0 +1,10 @@
+1. Realized the separation of front-end and back-end.
+2. Search/Query track: You can search for a track according to the track ID, and check its status and x/y address.
+3.postal fee: Enter the destination address x/y, you can get the estimated postage and delivery time.
+4. Realized update package, search package function web page
+5. After the user logs in, the user enters the personal ups website, which is different from the ups home page.
+6. Users can only change their own package information, but cannot change other people's package information.
+7. According to the package id (tracking number), users can query the status of any package.
+8. Excellent UI/UX design
+9. On the my package page, users can see all their packages and related details.
+10. Use the django.contrib.auth that comes with Django for authentication and authorization, and help to complete user-login and other functions.

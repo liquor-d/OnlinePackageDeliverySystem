@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/ups</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">passw0rd</property>
+
+        <!-- Hibernate ORM settings -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Entity classes to scan -->
+        <mapping class="org.example.model.UpsPackage"/>
+        <mapping class="org.example.model.Truck"/>
+    </session-factory>
+</hibernate-configuration>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE hibernate-configuration PUBLIC-->
+<!--        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"-->
+<!--        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">-->
+<!--<hibernate-configuration> <session-factory>-->
+<!--    &lt;!&ndash; Database connection settings &ndash;&gt;-->
+<!--    <property name="hibernate.connection.provider_class">com.zaxxer.hikari.hibernate.HikariConnectionProvider</property>-->
+<!--    <property name="hibernate.hikari.dataSourceClassName">org.postgresql.ds.PGSimpleDataSource</property>-->
+<!--    <property name="hibernate.hikari.dataSource.url">jdbc:postgresql://localhost:5432/ups</property>-->
+<!--    <property name="hibernate.hikari.dataSource.user">postgres</property>-->
+<!--    <property name="hibernate.hikari.dataSource.password">passw0rd</property>-->
+<!--    <property name="hibernate.hikari.maximumPoolSize">20</property>-->
+<!--    <property name="hibernate.hikari.idleTimeout">30000</property>-->
+<!--    &lt;!&ndash; Hibernate ORM settings &ndash;&gt;-->
+<!--    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
+<!--    <property name="hibernate.hbm2ddl.auto">update</property>-->
+<!--    <property name="hibernate.show_sql">true</property>-->
+<!--    <property name="hibernate.format_sql">true</property>-->
+<!--    &lt;!&ndash; Entity classes to scan &ndash;&gt;-->
+<!--    <mapping class="org.example.model.UpsPackage"/>-->
+<!--    <mapping class="org.example.model.Truck"/>-->
+<!--</session-factory>-->
+<!--</hibernate-configuration>-->

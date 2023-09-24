@@ -1,0 +1,16 @@
+{% extends "upsbase.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% for package in packages %}
+        <article class="media content-section">
+            <div class="media-body">
+                <p class="article-content"> Package ID: {{ package.packageid }}</p>
+                <p class="article-content"> X: {{ package.x }}</p>
+                <p class="article-content"> Y: {{ package.y }}</p>
+                <p class="article-content"> Current Status: {{ package.status }}</p>
+                <p class="article-content"> UpdateTime: {{ package.updatetime }}</p>
+                <p class="article-content"> Package Details: {{ package.detail }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

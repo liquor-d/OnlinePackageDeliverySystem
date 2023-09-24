@@ -1,0 +1,14 @@
+{% extends "upsbase.html" %}
+{% block content %}
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">submit</button>
+    </form>
+    <div class="border-top pt-2">
+        <small class="text-muted">
+            <a href="{% url 'login' %}">already have account</a>
+        </small>
+    </div>
+{% endblock content %}
